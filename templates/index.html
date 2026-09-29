@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Complaint Portal</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>College Complaint Portal</h1>
+            <p>Submit and track your college complaints</p>
+        </header>
+
+        <section class="card">
+            <h2>Submit a Complaint</h2>
+
+            <form id="complaintForm">
+
+                <label for="name">Student Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+                <label for="category">Complaint Category</label>
+                <select id="category" required>
+                    <option value="">Select category</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Library">Library</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Canteen">Canteen</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="details">Complaint Details</label>
+                <textarea
+                    id="details"
+                    rows="5"
+                    placeholder="Describe your complaint"
+                    required
+                ></textarea>
+
+                <button type="submit">Submit Complaint</button>
+
+            </form>
+
+            <p id="message"></p>
+        </section>
+
+        <section class="card">
+            <div class="complaints-header">
+                <h2>Submitted Complaints</h2>
+                <button id="refreshButton">Refresh</button>
+            </div>
+
+            <div id="complaintsList">
+                <p>Loading complaints...</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
