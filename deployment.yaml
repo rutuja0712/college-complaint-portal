@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: college-complaint-portal
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: college-complaint-portal
+  template:
+    metadata:
+      labels:
+        app: college-complaint-portal
+    spec:
+      containers:
+        - name: college-complaint-portal
+          image: rutujaw0712/college-complaint-portal:1.0
+          ports:
+            - containerPort: 5000
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 20
