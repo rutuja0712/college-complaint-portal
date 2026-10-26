@@ -75,31 +75,8 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                sh '''
-                    kubectl set image deployment/college-complaint-portal \
-                        college-complaint-portal=${DOCKER_IMAGE}:${BUILD_NUMBER} \
-                        -n ${KUBERNETES_NAMESPACE}
-                '''
-            }
-        }
+        
 
-        stage('Verify Kubernetes Rollout') {
-            steps {
-                sh '''
-                    kubectl rollout status \
-                        deployment/college-complaint-portal \
-                        -n ${KUBERNETES_NAMESPACE} \
-                        --timeout=180s
-
-                    kubectl get pods -n ${KUBERNETES_NAMESPACE}
-                    kubectl get deployment college-complaint-portal \
-                        -n ${KUBERNETES_NAMESPACE}
-                '''
-            }
-        }
-    }
 
     post {
         always {
@@ -107,8 +84,8 @@ pipeline {
         }
 
         success {
-            echo 'CI/CD pipeline completed successfully.'
-        }
+    echo 'CI pipeline completed: tests passed and Docker images published.'
+}
 
         failure {
             echo 'CI/CD pipeline failed. Check the stage logs above.'
